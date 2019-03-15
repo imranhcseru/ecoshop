@@ -15,6 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('sub_category_id')->unsigned()->index();
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->string('name');
             $table->string('image');
             $table->text('detail');
@@ -23,6 +25,8 @@ class CreateProductsTable extends Migration
             $table->integer('stock');
             $table->integer('created_at');
             $table->integer('updated_at');
+            $table->integer('admin_id')->unsigned()->index();
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
         });
     }
 
