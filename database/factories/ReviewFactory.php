@@ -12,7 +12,7 @@ $factory->define(App\Model\Review::class, function (Faker $faker) {
             return Customer::all()->random();
         },
         'review' => $faker->paragraph,
-        'star' => $faker->numberBetween(0-5),
+        'star' => $faker->numberBetween(0,5),
         'created_at' => $faker->unixTime($max = 'now') ,
         'updated_at' => $faker->unixTime($max = 'now')
     ];
