@@ -8,6 +8,9 @@ use App\Model\SubCategory;
 use App\Model\Admin;
 class Product extends Model
 {
+    protected $fillable = [
+        'sub_category_id','name','image','detail','price','discount','stock','admin_id'
+    ];
     public function review(){
         return $this->hasMany(Review::class);
     }
