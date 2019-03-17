@@ -15,7 +15,11 @@ class ProductCollection extends Resource
     public function toArray($request)
     {
         return [
+            'sub_category' => $this->subCategory->name,
             'name' => $this->name,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'image' => $this->image,
             'totalPrice' => ceil($this->price - $this->price*$this->discount/100),
             'rating' => $this->review->count() > 0 ? round($this->review->sum('star')/$this->review->count(),1) : 'No rating Yet',
             'href' => [
