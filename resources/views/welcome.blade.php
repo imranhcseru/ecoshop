@@ -20,7 +20,7 @@
                     $.each(products,function(key,product){
                         $.each(product, function(key, value) {
                             //if (value.sub_category == 'Dogs' )
-                                $orders.append('Rating: '+ value.rating + 'Image :'+ value.image + 'Product : ' + value.name + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ 'Price :' + value.price + 'Discount:' + value.discount +  'Current Price :'+ value.totalPrice + 'Details :' + value.href + '<br>');
+                                $orders.append('Rating: '+ value.rating + 'Image :'+ value.image + 'Product : ' + value.name + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ 'Price :' + value.price + 'Discount:' + value.discount +  'Current Price :'+ value.totalPrice + 'Details :' + value.href.detail + '<br>');
                         });
                     });
                 }

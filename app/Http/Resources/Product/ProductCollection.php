@@ -15,6 +15,7 @@ class ProductCollection extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'sub_category' => $this->subCategory->name,
             'name' => $this->name,
             'price' => $this->price,
