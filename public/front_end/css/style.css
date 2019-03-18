@@ -5,7 +5,11 @@ html {
   scroll-behavior: smooth;
 }
 header{
-	background-color:darkslategray;
+<<<<<<< HEAD
+	background-color: #5f24a1;
+=======
+	background-color: #c7b8d8;
+>>>>>>> 2cf3de1d3315627eebf5ffa41edd1af95272cf7e
 	font-style: solid , white;
 	height: 75px;
 	width: 100%;
@@ -49,7 +53,7 @@ li{
 	text-align: center;
 	position: center;
 	padding: 20px;
-	width:200px; 
+	width:140px; 
 
 }
 
@@ -134,7 +138,7 @@ footer{
 	
 	font-size: 20px;
 	padding : 2px 8px;
-	background-color:#f05a36;
+	background-color: mediumspringgreen;
   	color: white;
 	
 }
@@ -230,7 +234,7 @@ input{
 .food_name{
 	margin-top: 20px;
 	font-size: 22px;
-	color: black;
+	color: blue;
 }
 
 .img_box{
@@ -287,8 +291,4 @@ hr{
 	height: 50px;
 	margin-bottom: 40px;
 	text-align: left;
-}
-.item_for_you li{
-	display: inline-block;
-	list-style-type: none;
 }

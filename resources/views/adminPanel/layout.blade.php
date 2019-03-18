@@ -6,7 +6,7 @@
 	
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title>Admin - Food Lover</title>
+	<title>Admin - Foodie Guy</title>
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
@@ -72,18 +72,18 @@
 			<div id="sidebar-left" class="span2">
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="http://127.0.0.1:8000/api/categories"><i class="icon-bar-chart"></i><span class="hidden-tablet">Dashboard</span></a></li>
-                        <li><a href="http://127.0.0.1:8000/api/subcategories"><i class="icon-bar-chart"></i><span class="hidden-tablet">Categories</span></a></li>
-						<li><a href="http://127.0.0.1:8000/api/customers"><i class="icon-bar-chart"></i><span class="hidden-tablet">Sub Categories</span></a></li>
-						<li><a href="http://127.0.0.1:8000/api/customers"><i class="icon-bar-chart"></i><span class="hidden-tablet">Customers</span></a></li>
-                        <li><a href="{{URl::to('/admin/reviews')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reviews</span></a></li>	
+						<li><a href="{{URl::to('/admin/home')}}"><i class="icon-bar-chart"></i><span class="hidden-tablet">Dashboard</span></a></li>
+						<li><a href="http://127.0.0.1:8000/api/categories"><i class="icon-bar-chart"></i><span class="hidden-tablet">Categories</span></a></li>
+						<li><a href="http://127.0.0.1:8000/api/subcategories"><i class="icon-bar-chart"></i><span class="hidden-tablet">Sub Categories</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/api/customers"><i class="icon-bar-chart"></i><span class="hidden-tablet">Customers</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/api/reviews"><i class="icon-bar-chart"></i><span class="hidden-tablet">Reviews</span></a></li>	
 						<li>
-							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet">Products</span><span class="label label-important"></span></a>
+							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet">Product</span><span class="label label-important"></span></a>
 							<ul>
 								<li><a class="submenu" href="http://127.0.0.1:8000/api/products"><i class="icon-file-alt"></i><span class="hidden-tablet">All Products</span></a></li>
 								<li><a class="submenu" href="{{URl::to('/admin/publisheditems')}}"><i class="icon-file-alt"></i><span class="hidden-tablet">Published Products</span></a></li>
 								<li><a class="submenu" href="{{URl::to('/admin/draftitems')}}"><i class="icon-file-alt"></i><span class="hidden-tablet">Draft Products</span></a></li>
-								<li><a class="submenu" href="{{URl::to('/admin/additem')}}"><i class="icon-file-alt"></i><span class="hidden-tablet">Add Product</span></a></li>
+								<li><a class="submenu" href="{{URl::to('/admin/additem')}}"><i class="icon-file-alt"></i><span class="hidden-tablet">Add Products</span></a></li>
 							</ul>	
                         </li>
                         <li>
@@ -144,7 +144,7 @@
 	<footer>
 
 		<p>
-			<span class="hidden-phone" style="text-align:right;float:right">Copyroght  &copy Imran</span>
+			<span class="hidden-phone" style="text-align:right;float:right">Copyroght  &copy Imran Hosen</span>
 		</p>
 
 	</footer>

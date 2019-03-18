@@ -6,7 +6,7 @@
 	
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title>Admin -Food Lover</title>
+	<title>Admin - My Planet</title>
 	<!-- end: Meta -->
 	
 	<!-- start: Mobile Specific -->
@@ -53,7 +53,7 @@
 			<div class="row-fluid">
 				<div class="login-box">
 					
-					<h2>Login Admin account</h2>
+					<h2>Login to your account</h2>
                     <h3 style="color:red">
 						<?php
 							 $login_failed = Session::get('login_failed');
@@ -68,7 +68,7 @@
 							}
 						?>
 					</h3>
-					<form class="form-horizontal" action="{{url('/admin')}}" method="post">
+					<form class="form-horizontal" action="{{url('/admin/checkadmin')}}" method="post">
                     	{{csrf_field()}}
 						<fieldset>
 							

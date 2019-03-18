@@ -2,31 +2,31 @@
 @extends('adminPanel.layout')
 @section('content')
 <div class="row-fluid">	
-                <a class="quick-button metro black span2" href="{{url('/admin/categories')}}">
-					<!-- <i class="icon-barcode"></i> -->
+                <a class="quick-button metro green span2" href="{{url('/admin/categories')}}">
+					<i class="icon-barcode"></i>
 					<p>Categories</p>
 				</a>
-				<a class="quick-button metro black span2" href="{{url('/admin/users')}}">
-					<!-- <i class="icon-group"></i> -->
+				<a class="quick-button metro yellow span2" href="{{url('/admin/users')}}">
+					<i class="icon-group"></i>
 					<p>Users</p>
 					
 				</a>
-				<!-- <a class="quick-button metro red span2" href="{{url('/admin/reviews')}}">
+				<a class="quick-button metro red span2" href="{{url('/admin/reviews')}}">
 					<i class="icon-comments-alt"></i>
-					<p>Reviews</p> -->
+					<p>Reviews</p>
 					
 				</a>
-				<a class="quick-button metro black span2" href="{{url('/admin/allorders')}}">
-					<!-- <i class="icon-shopping-cart"></i> -->
+				<a class="quick-button metro blue span2" href="{{url('/admin/allorders')}}">
+					<i class="icon-shopping-cart"></i>
 					<p>All Orders</p>
 					
 				</a>
-				<a class="quick-button metro black span2" href="{{url('/admin/allitems')}}">
-					<!-- <i class="icon-barcode"></i> -->
+				<a class="quick-button metro green span2" href="{{url('/admin/allitems')}}">
+					<i class="icon-barcode"></i>
 					<p>All Items</p>
 				</a>
-				<a class="quick-button metro black span2" href="{{url('/admin/alladmins')}}">
-					<!-- <i class="icon-group"></i> -->
+				<a class="quick-button metro yellow span2" href="{{url('/admin/alladmins')}}">
+					<i class="icon-group"></i>
 					<p>Admins</p>
 					
 				</a>
@@ -58,20 +58,17 @@
 								  <th>Available Product</th>
                                   <th>Create Date</th>
                                   <th>Added By</th>
-								  
+								  <th>Actions</th>
 							  </tr>
 						  </thead>   
 						  <tbody>
-                            {{-- @foreach($data['items'] as $item)
+                            
 							<tr>
-                                <td>{{$item->item_name}}</td>
-								<td>{{$item->category}}</td>
-								<td>{{$item->available}}</td>
-                                <td>{{$item->create_date}}</td>
-                                <td>{{$item->added_by}}</td>
+                                
+									
 								
                             </tr>
-                            @endforeach --}}
+                            
 						  </tbody>
 					    </table>            
                     </div>
@@ -116,18 +113,11 @@
 							  </tr>
 						  </thead>
 						  <tbody>
-                            {{-- @foreach($data['unserved_orders'] as $order)
+                           
 							<tr>
-                                <td>{{$order->item_name}}</td>
-                                <td>{{$order->quantity}}</td>
-                                <td>{{$order->name}}</td>
-                                <td>{{$order->email}}</td>
-                                <td>{{$order->phone}}</td>
-                                <td>{{$order->address}}</td>
-                                <td>{{$order->date}}</td>
-                                <td><a href = "{{url('/admin/serveitem/'.$order->id)}}" onclick="return confirm('Are you sure you want to serve this item?');">Serve</a></td> 
+                               
                             </tr>
-                            @endforeach --}}
+                            
 						  </tbody>
 					    </table>            
                     </div>

@@ -36,11 +36,10 @@
                 </span>
             </div>
             <div class = "row" align = "center" id = "app">
-                {{-- <div  id = "app"> --}}
                     <div v-for = "product in allProducts">
                         <div v-if = "product.sub_category == 'Dogs'">
                             <div class="card" style="width: 22rem;">
-                                <a :href ="''"><img id = "product_image" class="card-img-top" src="/images/0a09d8530691a1c23a4e4f4ec3eeff2a.jpg" alt="Card image cap" style="height:170px;">@{{product.href.detail}}</a> 
+                                <a href ="@{{product.href.detail}}"><img id = "product_image" class="card-img-top" src="/images/0a09d8530691a1c23a4e4f4ec3eeff2a.jpg" alt="Card image cap" style="height:170px;"></a> 
                                 <div class="card-body" align = "center">
                                     <h5 class="card-title" id = "product_name" >@{{product.name}}</h5>
                                     <p class="card-text" id = "product_price"  style = "text-decoration: line-through;">৳@{{product.price}}</p>

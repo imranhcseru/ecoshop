@@ -6,6 +6,7 @@ use App\Model\Review;
 use Illuminate\Http\Request;
 use App\Model\Product;
 use App\Http\Resources\ReviewResource;
+use App\Http\Resources\ReviewCollection;
 
 class ReviewController extends Controller
 {
@@ -13,7 +14,11 @@ class ReviewController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+    public function allReview(){
+        return new ReviewCollection(Review::all());
+    }
     public function index(Product $product)
     {
         return ReviewResource::collection($product->review);
