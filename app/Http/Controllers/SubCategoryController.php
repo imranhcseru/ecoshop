@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\SubCategory;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\SubCategoryResource;
 class SubCategoryController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return SubCategoryResource::collection(Subcategory::all());
     }
 
     /**
