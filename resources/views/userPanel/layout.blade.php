@@ -18,6 +18,97 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="{{URL::asset('userStatic/css/style.css')}}">
+    <style>
+        #dvContainer {
+            position: relative;
+            display: inline-block;
+        }
+        
+        #category {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            margin-left: 20px;
+            background-color: white;
+        }
+        .card:hover{
+            border-top: 3px solid green;
+            border-bottom: 3px solid green;
+        }
+        #category_list:hover{
+            border-left: 3px solid red;
+            border-right: 3px solid red;
+        }
+        section{
+            max-height: 768px;
+        }
+        /* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* .container {  
+    max-width: 620px; 
+    min-width: 420px;
+    margin: 40px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    color: #888;
+} */
+
+/* Style the tabs */
+.tabs {
+    overflow: hidden;
+  margin-left: 20px;
+    margin-bottom: -2px; // hide bottom border
+}
+
+.tabs ul {
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+.tabs a{
+    float: left;
+    cursor: pointer;
+    padding: 12px 24px;
+    transition: background-color 0.2s;
+    border: 1px solid #ccc;
+    border-right: none;
+    background-color: #f1f1f1;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+}
+.tabs a:last-child { 
+    border-right: 1px solid #ccc;
+}
+
+/* Change background color of tabs on hover */
+.tabs a:hover {
+    background-color: #aaa;
+    color: #fff;
+}
+
+/* Styling for active tab */
+.tabs a.active {
+    background-color: #fff;
+    color: #484848;
+    border-bottom: 2px solid #fff;
+    cursor: default;
+}
+
+/* Style the tab content */
+.tabcontent {
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  box-shadow: 3px 3px 6px #e1e1e1
+}
+    </style>
 </head>
 <body>
     <header class = "bg-light">
@@ -28,32 +119,17 @@
         
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Categories
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Electronics</a></li>
-                    <li><a class="dropdown-item" href="#">Beauty & Health</a></li>
-                    <li><a class="dropdown-item" href="#">Babies & Toys</a></li>
-                    <li><a class="dropdown-item" href="#">Sports & Outdoor</a></li>
-                    <li><a class="dropdown-item" href="#">Mens Fashion</a></li>
-                    <li><a class="dropdown-item" href="#">Womens Fashion</a></li>
-                    </ul>
-                </li>
-            </ul>
         </div>
         <div class="wrap">
-            <div class="search">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <div class="search" style= "width:130%;">
+                <input type="text" class="searchTerm" placeholder="What are you looking for?" >
                 <button type="submit" class="searchButton">
                 <i class="fa fa-search">Search</i>
             </button>
             </div>
         </div>
         <div id = "campaign">
-            <a class="navbar-brand pb-2 " id = "cartLink" href="{{url('/cart')}}">
+            <a class="navbar-brand pb-2 " id = "cartLink" href="{{route('cart.index')}}">
                 <img id = "cart_icon" class = "cart_logo"src = "{{url('/userStatic/img/cart.png')}}">
                 <p id = "cart-number">
                     <?php 
@@ -75,8 +151,31 @@
     </div>
     </header>
     <hr>
+    <!-- Slider -->
+    <div class = "container-fluid" id="dvContainer">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" id = "slider_div">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{url('/userStatic/img/image1.jpg')}}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{url('/userStatic/img/image2.jpg')}}" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{url('/userStatic/img/image3.jpg')}}" alt="Third slide">
+                </div>
+            </div>
+        </div>
+        <div id="category">   
+            <br>     
+            <ul v-for = "category in categories ">
+            <li style = "list-style: none"><a :href="'/category/' + category.id">@{{category.name}}</a></li>
+            </div>       
+        </div>
+    </div>
     @yield('homeContent')
     @yield('cartContent')
+    @yield('categoryContent')
     <br>
     <br>
     <br>
@@ -134,6 +233,7 @@
         </section>
     </div>
     <script>
+    //jquerry
         $(document).ready(function(){
             $.ajaxSetup({
                 headers:{
@@ -164,6 +264,20 @@
             });
                 
         });
+//Vue js
+        new Vue({
+			  el: '#category',
+			  data () {
+			    return {
+                    categories: null
+			    }
+			  },
+			  mounted () {
+			    axios
+			      .get('http://127.0.0.1:8000/api/categories')
+			      .then(response => (this.categories = response.data.data))
+			  }
+			})
     </script>
 </body>
 </html>

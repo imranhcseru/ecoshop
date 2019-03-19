@@ -5,18 +5,17 @@ html {
   scroll-behavior: smooth;
 }
 header{
-<<<<<<< HEAD
 	background-color: #5f24a1;
-=======
 	background-color: #c7b8d8;
->>>>>>> 2cf3de1d3315627eebf5ffa41edd1af95272cf7e
 	font-style: solid , white;
 	height: 75px;
 	width: 100%;
 	
 	font-family:  Comic Sans MS;
 }
-
+.show-more{
+	text-align: right;
+}
 header a{
 	color: #f2f2f2;
 }

@@ -10,14 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//For User Panel
+//use GuzzleHttp\Client;
 Route::get('/', function () {
+    // $client = new \GuzzleHttp\Client([
+    //     'base_uri' => 'http://127.0.0.1:8000',
+    //     'defaults' => [
+    //         'exceptions' => false
+    //     ]
+    // ]);
+    // $response = $client->get('/api/categories');
+    // dd($response);
     return view('userPanel.home');
 });
-
+Route::Resource('/cart','CartController');
+Route::get('/category/{id}','FrontEndController@category');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//For Admin Panel
 Route::Resource('/admin','AdminController');
 Route::group(['prefix'=>'admin'],function(){
     Route::get('/',function(){
