@@ -22,4 +22,9 @@ class Product extends Model
     public function admin(){
         return $this->belongsTo(Admin::class);
     }
+
+    public static function getCartProduct($id){
+        $verdict = Self::where('id',$id)->first();
+        return $verdict;
+    }
 }

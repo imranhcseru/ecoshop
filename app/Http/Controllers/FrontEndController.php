@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\SubCategory;
+use Session;
+use Illuminate\Support\Facades\Redirect;
 class FrontEndController extends Controller
 {
     public function category($id){
@@ -13,11 +15,7 @@ class FrontEndController extends Controller
         return view('userPanel.category')->with('data',$data);
     }
 
-    public function addToCart(Request $request){
-        $prodOnCart = $request->prodOnCart;
-        $prodId = $request->prodId;
-        $prodOnCart = $prodOnCart +1;
-        Session::put('prodOnCart',$prodOnCart);
-        Session::push('prodId', $prodId);
+    public function cart(){
+        
     }
 }

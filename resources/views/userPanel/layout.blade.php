@@ -182,36 +182,7 @@
         </section>
     </div>
     <script>
-    //jquerry
-        $(document).ready(function(){
-            $.ajaxSetup({
-                headers:{
-                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
-                }
-            });
-            $(document).on('click','.addCart',function(event){
-                var prodOnCart = $(this).find('#prodOnCart').val();
-                var prodId = $(this).find('#prodId').val();
-                var token = $(this).find('#prodToken').val();
-                $.ajax({
-                    type : 'post',
-                    url : '/addtocart',
-                    data : {prodOnCart:prodOnCart,prodId:prodId,token:token},
-                    success:function(returned){
-                        swal({
-                            title:"Add to Cart",
-                            text: "1 Product added to Cart",
-                            icon: "success",
-                            timer:3000
-                        });
-                        setTimeout(
-                            function(){
-                                location.reload();
-                        }, 2000);  
-                    }
-                });
-            });   
-        });
+    
 //Vue js
         new Vue({
 			  el: '#category',
@@ -225,7 +196,12 @@
 			      .get('http://127.0.0.1:8000/api/categories')
 			      .then(response => (this.categories = response.data.data))
 			  }
-			})
+			});
+            $("#addCart").on("click", function (e) { 
+                setTimeout(function(){
+                    //location.reload();
+                }, 5000)            
+            });
     </script>
 </body>
 </html>

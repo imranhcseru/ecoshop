@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
+use Illuminate\Support\Facades\Redirect;
+use App\Model\Product;
 class CartController extends Controller
 {
     /**
@@ -11,9 +13,27 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function addToCart(Request $request){
+        $prodOnCart = $request->prodOnCart;
+        $prodId = $request->prodId;
+        $prodOnCart = $prodOnCart +1;
+        Session::put('prodOnCart',$prodOnCart);
+        Session::push('prodId', $prodId);
+        return Redirect::back();
+    }
+
     public function index()
     {
-        return view('userPanel.cart');
+        $data = array();
+        $cartProdId = Session::get('prodId');
+        $data['length'] = sizeof($cartProdId);
+        for ($id = 0;$id<sizeof($cartProdId);$id++){
+
+            $data[$id] = Product::getCartProduct($cartProdId[$id]); 
+        }
+        //print_r($data);
+        return view('userPanel.cart')->with('data',$data);
+        
     }
 
     /**

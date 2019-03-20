@@ -34,12 +34,12 @@
                                                 <p class="card-text" id = "product_price"  >Price: ৳ <span style = "text-decoration: line-through;">@{{product.price}}</span></p>
                                                 <p class="card-text" id = "product_discount" >-%@{{product.discount}}</p>
                                                 <p class="card-text" id = "product_totalPrice">Current Price: ৳ @{{product.totalPrice}}</p>
-                                                <button class="btn btn-warning addCart">
+                                                <form action="/addtocart" method = "POST">
                                                     <input name = 'prodOnCart' type = "hidden" id = "prodOnCart" value = <?php echo Session::get('prodOnCart');?>>
                                                     <input name = "_token" type = "hidden" id="prodToken"   value="{{csrf_token()}}">
-                                                    <input name = 'prodId' type = "hidden" id = "product_id">
-                                                    Add to Cart
-                                                </button>
+                                                    <input name = 'prodId'  type = "hidden" id = "product_id" :value="product.id">
+                                                    <button class="btn btn-warning addCart" id = "addCart"> Add to Cart</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>  
@@ -64,6 +64,6 @@
 			      .get('http://127.0.0.1:8000/api/products')
 			      .then(response => (this.allProducts = response.data.data))
 			  }
-			})
+			});
     </script>
 @endsection
