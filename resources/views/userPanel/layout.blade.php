@@ -47,13 +47,24 @@
         .active a {
             background-color: lightblue !important;
         }
+
+        hr{
+            display: block; 
+            content: ""; 
+            height: 30px; 
+            margin-top: -31px; 
+            border-style: solid; 
+            border-color: darkblue; 
+            border-width: 0 0 1px 0; 
+            border-radius: 20px; 
+        }
     </style>
 </head>
 <body>
     <header class = "bg-light">
     <div class = "container-fluid">
         <nav class="navbar navbar-expand-md navbar-light ">
-        <a class="navbar-brand pb-2 " href="{{url('/')}}"><img class = "cart_logo"src = "{{url('/userStatic/img/logo.jpg')}}"></a>
+        <a class="navbar-brand pb-2 " href="{{url('/')}}"><img class = "cart_logo"src = "{{url('/userStatic/img/logo.png')}}"></a>
         <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         
         </button>
@@ -89,7 +100,6 @@
         </nav>
     </div>
     </header>
-    <hr>
     <!-- Slider -->
     <div class = "container-fluid" id="dvContainer">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -200,8 +210,7 @@
                         }, 2000);  
                     }
                 });
-            });
-                
+            });   
         });
 //Vue js
         new Vue({

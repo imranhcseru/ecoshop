@@ -7,7 +7,7 @@
                 <span class = "row-title">
                 <h3 >Flash Sale</h3>
                 </span>
-                <span class = "row-title"   style = "margin-left:1020px; margin-top:13px;">
+                <span class = "row-title"   style = "margin-left:1150px; margin-top:13px;">
                     <a href = "#" class = "btn btn-info">Show More</a>
                 </span>
             </div>
@@ -33,12 +33,14 @@
                 </div>
             </div>
         </div>
+        <br>
+        <hr>
         <div class = "row"> 
             <div class = "row">
                 <span class = "row-title">
                 <h3 >Categories</h3>
                 </span>
-                <span class = "row-title"   style = "margin-left:1020px; margin-top:13px;">
+                <span class = "row-title"   style = "margin-left:1150px; margin-top:13px;">
                     <a href = "#" class = "btn btn-info">Show More</a>
                 </span>
             </div>
@@ -55,12 +57,14 @@
                 </div>
             </div>
         </div>
-        <div class = "row"> 
+        <br>
+        <hr>
+        <div class = "row" style="margin-left:100px;"> 
             <div class = "row">
                 <span class = "row-title">
                 <h3 >Product For You</h3>
                 </span>
-                <span class = "row-title"   style = "margin-left:1020px; margin-top:13px;">
+                <span class = "row-title"   style = "margin-left:980px; margin-top:13px;">
                     <a href = "#" class = "btn btn-info">Show More</a>
                 </span>
             </div>
@@ -77,7 +81,7 @@
                                 <button class="btn btn-warning addCart">
                                         <input name = 'prodOnCart' type = "hidden" id = "prodOnCart" value = <?php echo Session::get('prodOnCart');?>>
                                         <input name = "_token" type = "hidden" id="prodToken"   value="{{csrf_token()}}">
-                                        <input name = 'prodId' type = "hidden" id = "product_id">
+                                        <input name = 'prodId'  type = "hidden" id = "product_id" :value="product.id">
                                     Add to Cart
                                 </button>
                             </div>
@@ -87,7 +91,8 @@
             </div>
         </div>
     </div>
-    
+    <br>
+    <hr>
     <script>
         new Vue({
 			  el: '#flash',

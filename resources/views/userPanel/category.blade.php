@@ -49,23 +49,9 @@
                     @endforeach 
                 </div> 
             </div>
-        </div>
-        
+        </div> 
     </div>
     <script>
-        // new Vue({
-        //     //el: '#showProd',
-        //     data: {
-        //         name: 'Vue.js'
-        //     },
-        //     methods: {
-        //         greet: function (event) {
-        //         // `this` inside methods point to the Vue instance
-        //         var val = this.
-        //         alert('Hello ' + this.name + '!')
-        //         }
-        //     }
-        // });
         new Vue({
 			  el: '#showProd',
 			  data () {

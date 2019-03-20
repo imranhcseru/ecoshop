@@ -25,6 +25,7 @@ Route::get('/', function () {
 });
 Route::Resource('/cart','CartController');
 Route::get('/category/{id}','FrontEndController@category');
+Route::post('/addtocart','FrontEndController@addToCart');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -12,4 +12,12 @@ class FrontEndController extends Controller
         //print_r($data);
         return view('userPanel.category')->with('data',$data);
     }
+
+    public function addToCart(Request $request){
+        $prodOnCart = $request->prodOnCart;
+        $prodId = $request->prodId;
+        $prodOnCart = $prodOnCart +1;
+        Session::put('prodOnCart',$prodOnCart);
+        Session::push('prodId', $prodId);
+    }
 }
