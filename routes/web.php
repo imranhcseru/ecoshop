@@ -31,10 +31,29 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //For Admin Panel
-Route::Resource('/admin','AdminController');
+//Route::Resource('/admin','AdminController');
 Route::group(['prefix'=>'admin'],function(){
     Route::get('/',function(){
         return view('adminPanel.login');
     });
-    Route::post('/','AdminController@home');
+    Route::post('/','AdminController@checkAdmin');
+    Route::get('/addadmin',function(){
+        return view('adminPanel.add_admin');
+    });
+    Route::get('/home','BackEndController@home');
+    Route::get('/categories','BackEndController@categories');
+    Route::post('/categories','BackEndController@store_category');
+    Route::get('/subcategories','BackEndController@subcategories');
+    Route::post('/subcategories','BackEndController@store_subcategories');
+    Route::get('/users','BackEndController@users');
+    Route::get('/products','BackEndController@products');
+    Route::get('/publishedproducts','BackEndController@published_products');
+    Route::get('/draftproducts','BackEndController@draft_products');
+    Route::get('/addproduct',function(){
+        return view('adminPanel.add_product');
+    });
+    Route::post('/addproduct','BackEndController@store_product');
+    Route::get('/admins','BackEndController@admins');
+    Route::get('/reviews','BackEndController@reviews');
 });
+

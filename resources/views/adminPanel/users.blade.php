@@ -1,6 +1,6 @@
 
 
-@extends('back_end.layout')
+@extends('adminPanel.layout')
 @section('content')
 <div class="row-fluid sortable">
         <div class="box span12">
@@ -20,9 +20,9 @@
 						  <tbody>
                             @foreach($users as $user)
 							<tr>
-                                <td>{{$user->name}}</td>
+                                <td>{{$user->first_name}}&nbsp;&nbsp;{{$user->last_name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->date}}</td>
+                                <td>{{$user->created_at}}</td>
                             </tr>
                             @endforeach
 						  </tbody>

@@ -9,7 +9,7 @@ use App\Model\Admin;
 class Product extends Model
 {
     protected $fillable = [
-        'sub_category_id','name','detail','price','discount','stock','admin_id'
+        'sub_category_id','name','type','detail','price','discount','stock','admin_id'
     ];
     public function review(){
         return $this->hasMany(Review::class);
