@@ -9,7 +9,6 @@
             <div class="box-content">
                 <h3 style="color:red;">
                     <?php 
-                        
                         $message = Session::get('warning');
                         if($message){
                             echo $message;
@@ -17,37 +16,37 @@
                         }
                     ?>
                 </h3>
-                <form class="form-horizontal" action="{{url('/admin/storeadmin')}}" method="post" enctype = "multipart/form-data">
+                <form class="form-horizontal" action="{{url('/admin/addadmin')}}" method="post" enctype = "multipart/form-data">
                     {{csrf_field()}}
                     <fieldset>
                         <div class="control-group">
                             <label class="control-label" for="typeahead">First Name</label>
                             <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "name">
+                                <input type="text" class="span6 typeahead" id="typeahead"  name = "firstname" required>
                             </div>
                         </div>  
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Last Name</label>
                             <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "name">
+                                <input type="text" class="span6 typeahead" id="typeahead"  name = "lastname" required>
                             </div>
                         </div>           
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Email</label>
                             <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "email">
+                                <input type="text" class="span6 typeahead" id="typeahead"  name = "email" required>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Password</label>
                             <div class="controls">
-                                <input type="password" class="span6 typeahead" id="typeahead"  name = "password">
+                                <input type="password" class="span6 typeahead" id="typeahead"  name = "password" required>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Confirm Pasword</label>
                             <div class="controls">
-                                <input type="password" class="span6 typeahead" id="typeahead"  name = "con_password">
+                                <input type="password" class="span6 typeahead" id="typeahead"  name = "con_password" required>
                             </div>
                         </div>
                         <div class="form-actions">
@@ -56,6 +55,6 @@
                     </fieldset>
                 </form> 
             </div>
-        </div><!--/span-->
-	</div><!--/row-->
+        </div>
+	</div>
 @endsection

@@ -30,16 +30,20 @@
 						  <tbody>
                             @foreach($products as $product)
 							<tr>
-                                <td>{{$product->name}}</td>
+								<td>
+									<a class="btn btn-info" href="{{url('/admin/products/'.$product->id.'/details')}}">
+										{{$product->name}}
+									</a>
+								</td>
 								<td>{{$product->sub_category_id}}</td>
 								<td>{{$product->stock}}</td>
                                 <td>{{$product->updated_at}}</td>
                                 <td>{{$product->admin_id}}</td>
 								<td class="center">
-									<a class="btn btn-info" href="{{url('/admin/addsupply/'.$product->id)}}">
+									<a class="btn btn-info" href="{{url('/admin/products/'.$product->id.'/addsupply')}}">
 										<i>Add Supply</i>  
 									</a>
-									<a class="btn btn-danger" href="{{url('/admin/changetype/'.$product->id)}}" onclick="return confirm('Are you sure you want to Unpublish this product?');">
+									<a class="btn btn-danger" href="{{url('/admin/products/'.$product->id.'/changetype')}}" onclick="return confirm('Are you sure you want to Unpublish this product?');">
 										<i>Unpublish</i> 
 									</a>
 								</td>

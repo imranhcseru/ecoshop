@@ -9,15 +9,20 @@
             <div class="box-content">
             <h3 style="color:green">
                 <?php
-                    $update_item = Session::get('update_item');
-                    $delete_item = Session::get('delete_item');
-                    if($delete_item){
-                        echo($delete_item);
-                        Session::put('delete_item',null);
+                    $product_update = Session::get('product_update');
+                    $product_delete = Session::get('product_delete');
+                    $add_product = Session::get('add_product');
+                    if($product_delete){
+                        echo($product_delete);
+                        Session::put('product_delete',null);
                     }
-                    if($update_item){
-                        echo($update_item);
-                        Session::put('update_item',null);
+                    if($product_update){
+                        echo($product_update);
+                        Session::put('product_update',null);
+                    }
+                    if($add_product){
+                        echo($add_product);
+                        Session::put('add_product',null);
                     }
                 ?>
             </h3>
@@ -37,7 +42,11 @@
                 <tbody>
                     @foreach($products as $product)
                     <tr>
-                        <td>{{$product->name}}</td>
+                        <td>
+                            <a class="btn btn-info" href="{{url('/admin/products/'.$product->id.'/details')}}">
+                                {{$product->name}}
+                            </a>
+                        </td>
                         <td>{{$product->sub_category_id}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->type}}</td>
@@ -45,10 +54,10 @@
                         <td>{{$product->updated_at}}</td>
                         <td>{{$product->admin_id}}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="{{url('/admin/editproduct/'.$product->id)}}">
+                            <a class="btn btn-info" href="{{url('/admin/products/'.$product->id.'/edit')}}">
                                 <i class="halflings-icon white edit"></i>  
                             </a>
-                            <a class="btn btn-danger" href="{{url('/admin/deleteproduct/'.$product->id)}}" onclick="return confirm('Are you sure you want to delete this Item?');">
+                            <a class="btn btn-danger" href="{{url('/admin/products/'.$product->id.'/delete')}}" onclick="return confirm('Are you sure you want to delete this Item?');">
                                 <i class="halflings-icon white trash"></i> 
                             </a>
                         </td>

@@ -39,7 +39,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    //For Api
+    public function store(Request $request)
     {
         $product = new Product;
         $product->sub_category_id = $request->sub_category_id;
@@ -107,4 +108,6 @@ class ProductController extends Controller
         $product->delete();
         return response(null,204);
     }
+
+    //For Admin Interface
 }

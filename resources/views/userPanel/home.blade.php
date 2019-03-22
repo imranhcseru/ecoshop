@@ -95,55 +95,55 @@
     <hr>
     <script>
         new Vue({
-			  el: '#flash',
-			  data () {
-			    return {
-                    allProducts: null
-			    }
-			  },
-			  mounted () {
-			    axios
-			      .get('http://127.0.0.1:8000/api/products')
-			      .then(response => (this.allProducts = response.data.data))
-			  }
-			});
-            new Vue({
-			  el: '#subcategory',
-			  data () {
-			    return {
-                    subcategories: null
-			    }
-			  },
-			  mounted () {
-			    axios
-			      .get('http://127.0.0.1:8000/api/categories')
-			      .then(response => (this.subcategories = response.data.data))
-			  }
-			});
-            new Vue({
-			  el: '#prod4u',
-			  data () {
-			    return {
-                    allProducts: null
-			    }
-			  },
-			  mounted () {
-			    axios
-			      .get('http://127.0.0.1:8000/api/products')
-			      .then(response => (this.allProducts = response.data.data))
-			  }
-			});
-            $(document).on('click','#addCart',function(){
-                setTimeout(
-                    function(){
-                        location.reload();
-                }, 3000);
-                swal({
-                    title:"Add to Cart",
-                    text: "1 Product added to Cart",
-                    icon: "success",
-                    timer:3000
-                });       
-            });
+            el: '#flash',
+            data () {
+            return {
+                allProducts: null
+            }
+            },
+            mounted () {
+            axios
+                .get('http://127.0.0.1:8000/api/products')
+                .then(response => (this.allProducts = response.data.data))
+            }
+        });
+        new Vue({
+            el: '#subcategory',
+            data () {
+            return {
+                subcategories: null
+            }
+            },
+            mounted () {
+            axios
+                .get('http://127.0.0.1:8000/api/categories')
+                .then(response => (this.subcategories = response.data.data))
+            }
+        });
+        new Vue({
+            el: '#prod4u',
+            data () {
+            return {
+                allProducts: null
+            }
+            },
+            mounted () {
+            axios
+                .get('http://127.0.0.1:8000/api/products')
+                .then(response => (this.allProducts = response.data.data))
+            }
+        });
+        $(document).on('click','#addCart',function(){
+            setTimeout(
+                function(){
+                    location.reload();
+            }, 3000);
+            swal({
+                title:"Add to Cart",
+                text: "1 Product added to Cart",
+                icon: "success",
+                timer:3000
+            });       
+        });
     </script>
 @endsection

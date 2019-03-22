@@ -14,7 +14,7 @@
 			<i class="icon-comments-alt"></i>
 			<p>Reviews</p>
 		</a>
-		<a class="quick-button metro blue span2" href="{{url('/admin/allorders')}}">
+		<a class="quick-button metro blue span2" href="{{url('/admin/orders')}}">
 			<i class="icon-shopping-cart"></i>
 			<p>All Orders</p>
 		</a>
@@ -58,7 +58,11 @@
 				<tbody>
 					@foreach($data['products'] as $product)
 						<tr>
-							<td>{{$product->name}}</td>
+							<td>
+								<a class="btn btn-info" href="{{url('/admin/products/'.$product->id.'/details')}}">
+									{{$product->name}}
+								</a>
+							</td>
 							<td>{{$product->sub_category_id}}</td>
 							<td>{{$product->stock}}</td>
 							<td>{{$product->created_at}}</td>
@@ -97,18 +101,18 @@
 				<table class="table ">
 					<thead>
 						<tr>
-							<th>Item</th>
+							<th>Order Number</th>
+							<th>Customer</th>
+							<th>Products</th>
 							<th>Quantity</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Contact Number</th>
-							<th>Address</th>
-							<th>Date</th>
+							<th>Order Date</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
+							<td></td>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>            
