@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 class BackEndController extends Controller
 {
+    
     public function home(){
         $type = 'published';
         $data['products'] = Product::orderBy('published_at','DESC')->paginate(20);
@@ -232,21 +233,27 @@ class BackEndController extends Controller
     }
 
     public function add_product(){
-        $data = array();
-        $data['categories'] = DB::table('categories')->orderBy('name','ASC')->get();
-        $data['subcategories'] = DB::table('sub_categories')->orderBy('name','ASC')->get();
+        // $categories = DB::table('category')->pluck("name","id");
+        // return view('home',compact('countries'));
+        // $data = array();
+        $categories = DB::table('categories')->orderBy('name','ASC')->pluck("name","id");
+        // $data['subcategories'] = DB::table('sub_categories')->orderBy('name','ASC')->get();
         $user_email = Session::get('user_email');
         if($user_email){
-            return view('adminPanel.add_product')->with('data',$data);
+            return view('adminPanel.add_product')->with('categories',$categories);
         }else{
             Session::put('login_first','You need to log in first');
             return view('adminPanel.login');
         }
     }
+
+    public function getSubcategory($id){
+        $subcategories = DB::table("sub_categories")->where("category_id",$id)->orderBy('name','ASC')->pluck("name","id");
+        return json_encode($subcategories);
+    }
     public function store_product(Request $request){
         $product = new Product;
-        $sub_category = SubCategory::where('name',$request->subcategory)->first();
-        $product->sub_category_id = $sub_category->id;
+        $product->sub_category_id = $request->subcategory;
         $product->name = $request->name;
         switch($request->submit) {
             case 'published': 

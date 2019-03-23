@@ -12,6 +12,8 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 	</head>
 
 	<body>
@@ -100,6 +102,40 @@
 			</footer>
 		</div>
 		<!-- start: JavaScript-->
+		<script>
+			$(document).ready(function() {
+				$.ajaxSetup({
+					headers:{
+						'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+					}
+				});
+				$('select[name="category"]').on('change', function(){
+					var countryId = $(this).val();
+					if(countryId) {
+						$.ajax({
+							url: '/subcategory/get/'+countryId,
+							type:"GET",
+							dataType:"json",
+							beforeSend: function(){
+								$('#loader').css("visibility", "visible");
+							},
+							success:function(data) {
+								$('select[name="subcategory"]').empty();
+								$.each(data, function(key, value){
+									$('select[name="subcategory"]').append('<option value="'+ key +'">' + value + '</option>');
+								});
+							},
+							complete: function(){
+								$('#loader').css("visibility", "hidden");
+							}
+						});
+					}
+					else {
+						$('select[name="subcategory"]').empty();
+					}
+				});
+			});
+		</script>
 		<script src="{{URL::asset('back_end/js/jquery-1.9.1.min.js')}}"></script>
 		<script src="{{URL::asset('back_end/js/jquery-migrate-1.0.0.min.js')}}"></script>
 		<script src="{{URL::asset('back_end/js/jquery-ui-1.10.0.custom.min.js')}}"></script>

@@ -51,9 +51,10 @@
 								<label class="control-label" for="selectError3">Category</label>
 								<div class="controls">
 									<select id="selectError3" name = "category">
-										@foreach($data['categories'] as $category)
-											<option>{{$category->name}}</option>
-										@endforeach
+										<option value="">--Category--</option>
+										@foreach ($categories as $category => $value)
+                                        <option value="{{ $category }}"> {{ $value }}</option>   
+                                        @endforeach
 								</select>
 								</div>
 							</div>
@@ -61,9 +62,7 @@
 								<label class="control-label" for="selectError3">Sub Category</label>
 								<div class="controls">
 									<select id="selectError3" name = "subcategory">
-										@foreach($data['subcategories'] as $subcategory)
-											<option>{{$subcategory->name}}</option>
-										@endforeach
+										<option>--Sub Category--</option>
 									</select>
 								</div>
 							</div>

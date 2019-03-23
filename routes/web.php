@@ -42,6 +42,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //Admin Panel
+Route::get('subcategory/get/{id}', 'BackEndController@getSubcategory');
 Route::group(['prefix'=>'admin'],function(){
     Route::get('/',function(){
         $user_email = Session::get('user_email');
