@@ -12,17 +12,8 @@
 */
 //For User Panel
 //use GuzzleHttp\Client;
-Route::get('/', function () {
-    // $client = new \GuzzleHttp\Client([
-    //     'base_uri' => 'http://127.0.0.1:8000',
-    //     'defaults' => [
-    //         'exceptions' => false
-    //     ]
-    // ]);
-    // $response = $client->get('/api/categories');
-    // dd($response);
-    return view('userPanel.home');
-});
+Route::get('/', 'FrontEndController@index');
+Route::get('/flashsale', 'FrontEndController@flashsale');
 Route::Resource('/cart','CartController');
 Route::get('/category/{id}','FrontEndController@category');
 Route::post('/addtocart','CartController@addToCart');
@@ -30,8 +21,20 @@ Route::post('/removefromcart','CartController@removeFromCart');
 Route::get('/checkout','FrontEndController@checkout');
 //Route::get('/order','OrderController@store');
 Route::post('/checkout','OrderController@store');
-Route::get('/logout',function(){
-    Session::flush();
+Route::get('/customerregister',function(){
+    return view('userPanel.register');
+});
+Route::post('/customerregister','CustomerController@store');
+Route::get('/customerlogin',function(){
+    return view('userPanel.login');
+});
+Route::post('/customerlogin','CustomerController@check');
+Route::get('/customerlogout',function(){
+    Session::put('customer_email',null);
+    Session::put('customer_name',null);
+    Session::put('phonenumber',null);
+    Session::put('prodId',null);
+    Session::put('prodOnCart',null);
     return Redirect::to('/');
 });
 //Route::get('/cart','FrontEndController@cart');
@@ -41,7 +44,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Admin Panel
 Route::group(['prefix'=>'admin'],function(){
     Route::get('/',function(){
-        return view('adminPanel.login');
+        $user_email = Session::get('user_email');
+        if($user_email){
+            return Redirect::to('/admin/home');
+        }else{
+            return view('adminPanel.login');
+        }
     });
     Route::get('/logout','BackEndController@logout');
     Route::post('/','AdminController@checkAdmin');
@@ -73,6 +81,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/unservedorders','OrderController@unServedOrders');
     Route::get('/orders/{id}/serve','OrderController@serveOrder');
     Route::get('/orders/{id}/delete','OrderController@destroy');
+    Route::get('/orders/{id}/details','OrderController@show');
     Route::get('/admins','AdminController@admins');
     Route::get('/reviews','BackEndController@reviews');
 });

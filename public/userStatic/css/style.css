@@ -17,9 +17,10 @@ header{
     width: 50px;
 }
 #cart-number{
+    font-size: 30px;
   position: absolute;
-  top: 11px;
-  right: 196px;
+  top: 20px;
+  right: 165px;
   color:red;
 }
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);

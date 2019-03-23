@@ -29,7 +29,7 @@
             <table class="table ">
                 <thead>
                     <tr>
-                        <th>Item</th>
+                        <th>Product</th>
                         <th>Category</th>
                         <th>Price</th>
                         <th>Published/Draft</th>

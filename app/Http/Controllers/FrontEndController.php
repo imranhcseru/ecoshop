@@ -10,7 +10,16 @@ use App\Model\OrderProduct;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 class FrontEndController extends Controller
-{
+{   
+    public function index(){
+        $products = Product::orderBy('discount','DESC')->paginate(5);
+        return view('userPanel.home')->with('products',$products);
+    }
+
+    public function flashsale(){
+        $products = Product::orderBy('discount','DESC')->paginate(30);
+        return view('userPanel.flashsale')->with('products',$products);
+    }
     public function category($id){
         $data = array();
         $data['subcategories'] = SubCategory::where('category_id',$id)->get();

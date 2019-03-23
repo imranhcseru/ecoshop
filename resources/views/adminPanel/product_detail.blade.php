@@ -51,7 +51,13 @@
                             <div class="controls">
                                 <input type="text" class="span6 typeahead" id="typeahead"   value = {{$product->stock}} disabled>
                             </div>
-                        </div>          
+                        </div> 
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Status</label>
+                            <div class="controls">
+                                <input type="text" class="span6 typeahead" id="typeahead"   value = {{$product->type}} disabled>
+                            </div>
+                        </div>         
                         <div class="control-group hidden-phone">
                             <label class="control-label" for="textarea2">Product Description</label>
                             <div class="controls">

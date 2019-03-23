@@ -62,7 +62,8 @@ class OrderController extends Controller
         }
         Session::put('prodOnCart',null);
         Session::put('prodId', null);
-        return view('userPanel.home');
+        Session::put('customer_order_success', 'Order Submitted Successfully');
+        return Redirect::to('/');
     }
 
     /**
@@ -71,9 +72,18 @@ class OrderController extends Controller
      * @param  \App\Model\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $user_email = Session::get('user_email');
+        if($user_email){
+            $data = array();
+            $data['orderproduct'] = OrderProduct::where('order_id',$id)->get();
+            $data['order'] = Order::where('id',$id)->first();
+            return view('adminPanel.order_details')->with('data',$data);
+        }else{
+            Session::put('login_first','You need to log in first');
+            return view('adminPanel.login');
+        }
     }
 
     /**

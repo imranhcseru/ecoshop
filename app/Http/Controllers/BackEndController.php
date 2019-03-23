@@ -15,7 +15,7 @@ class BackEndController extends Controller
 {
     public function home(){
         $type = 'published';
-        $data['products'] = Product::limit(20)->get();
+        $data['products'] = Product::orderBy('published_at','DESC')->paginate(20);
         //$data['unserved_orders'] = DB::table('tbl_order')->where('type','unserved')->orderBy('date','DESC')->paginate(20);
         $user_email = Session::get('user_email');
         if($user_email){
@@ -58,12 +58,7 @@ class BackEndController extends Controller
         Session::put('user_name',null);
         Session::put('user_email',null);
         $user_email = Session::get('user_email');
-        if($user_email){
-            return view('adminPanel.login');
-        }else{
-            Session::put('login_first','You need to log in first');
-            return view('adminPanel.login');
-        }
+        return Redirect::to('/admin');
     } 
 
     public function users(){

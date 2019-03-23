@@ -18,6 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="{{URL::asset('userStatic/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{URL::asset('userStatic/css/login.css')}}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{URL::asset('userStatic/css/register.css')}}">
     <style>
         #dvContainer {
             position: relative;
@@ -62,43 +64,77 @@
 </head>
 <body>
     <header class = "bg-light">
-    <div class = "container-fluid">
-        <nav class="navbar navbar-expand-md navbar-light ">
-        <a class="navbar-brand pb-2 " href="{{url('/')}}"><img class = "cart_logo"src = "{{url('/userStatic/img/logo.png')}}"></a>
-        <a href = "/logout" class = "btn btn-warning">Log Out</a>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        </div>
-        <div class="wrap">
-            <div class="search" style= "width:130%;">
-                <input type="text" class="searchTerm" placeholder="What are you looking for?" >
-                <button type="submit" class="searchButton">
-                <i class="fa fa-search">Search</i>
-            </button>
-            </div>
-        </div>
-        <div id = "campaign">
-            <a class="navbar-brand pb-2 " id = "cartLink" href="{{route('cart.index')}}">
-                <img id = "cart_icon" class = "cart_logo"src = "{{url('/userStatic/img/cart.png')}}">
-                <p id = "cart-number">
-                    <?php 
-                        if(Session::has('prodOnCart')){
-                            //session()->flush();
-                            echo Session::get('prodOnCart');
+        <div class = "container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light ">
+                <a class="navbar-brand pb-2 " href="{{url('/')}}"><img class = "cart_logo"src = "{{url('/userStatic/img/logo.png')}}"></a>
+                
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                </div>
+                <div class="wrap">
+                    <div class="search" style= "width:130%;">
+                        <input type="text" class="searchTerm" placeholder="What are you looking for?" >
+                        <button type="submit" class="searchButton">
+                        <i class="fa fa-search">Search</i>
+                    </button>
+                    </div>
+                </div>
+                <div id = "campaign">
+                    <a class="navbar-brand pb-2 " id = "cartLink" href="{{route('cart.index')}}">
+                        <img id = "cart_icon" class = "cart_logo"src = "{{url('/userStatic/img/cart.png')}}">
+                        <p id = "cart-number">
+                            <?php 
+                                if(Session::has('prodOnCart')){
+                                    //session()->flush();
+                                    echo Session::get('prodOnCart');
+                                }
+                                else{
+                                    Session::put('prodOnCart',0);
+                                    echo Session::get('prodOnCart');
+                                }
+                            ?>
+                        </p>
+                    </a>
+                </div>
+                
+                <ul class="right" style="list-style:none;">
+                    <?php
+                        $customer_email = Session::get('customer_email');
+                        if($customer_email){
+                    ?>
+                        <li class="logout"><a class = "btn btn-warning" href = "{{url('/customerlogout')}}">Log Out</a></li><br>
+                    <?php
                         }
                         else{
-                            Session::put('prodOnCart',0);
-                            echo Session::get('prodOnCart');
-                        }
-                    ?>
-                </p>
-            </a>
+                    ?>		
+                    <li><a class = "btn btn-primary" href = "{{url('/customerlogin')}}">Log In</a></li>
+                    <li><a class = "btn btn-secondary" href="{{url('/customerregister')}}">Register</a></li>
+                        <?php }?>
+                </ul>
+            </nav>
         </div>
-        <a class = "btn btn-success">Login</a><span>  &nbsp;&nbsp;&nbsp;  </span>
-        <a class = "btn btn-secondary">Register</a>
-        </nav>
-    </div>
     </header>
     <!-- Slider -->
+    <div class = "container-fluid" align = "center">
+        <h4 style="color:green">
+            <?php
+                $customer_register_success = Session::get('customer_register_success');
+                $customer_order_success = Session::get('customer_order_success');
+                $product_removed = Session::get('product_removed');
+                if($customer_register_success){
+                    echo($customer_register_success);
+                    Session::put('customer_register_success',null);
+                }
+                if($customer_order_success){
+                    echo($customer_order_success);
+                    Session::put('customer_order_success',null);
+                }
+                if($product_removed){
+                    echo($product_removed);
+                    Session::put('product_removed',null);
+                }
+            ?>
+        </h4>
+    </div>
     <div class = "container-fluid" id="dvContainer">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" id = "slider_div">
@@ -120,6 +156,7 @@
             </div>       
         </div>
     </div>
+    @yield('content')
     @yield('homeContent')
     @yield('cartContent')
     @yield('categoryContent')
@@ -201,38 +238,6 @@
                     //location.reload();
                 }, 5000)            
             });
-
-        //Jquerry
-        $(document).ready(function(){
-            $.ajaxSetup({
-                headers:{
-                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
-                }
-            });
-            $(document).on('click','.removeButton',function(event){
-                var prodOnCart = $(this).find('#prodOnCart').val();
-                var cartIndex = $(this).find('#cart_index').val();
-                var token = $(this).find('#prodToken').val();
-                $.ajax({
-                    type : 'post',
-                    url : '/removefromcart',
-                    data : {prodOnCart:prodOnCart,cartIndex:cartIndex,token:token},
-                    success:function(returned){
-                        // swal({
-                        //     title:"Remove",
-                        //     text: "Product Removed Cart",
-                        //     icon: "success",
-                        //     timer:3000
-                        // });
-                        setTimeout(
-                            function(){
-                                location.reload();
-                        }, 2000);  
-                    }
-                });
-            });
-                
-        });
     </script>
 </body>
 </html>

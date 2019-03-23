@@ -26,24 +26,31 @@ class CartController extends Controller
     {
         $data = array();
         $cartProdId = Session::get('prodId');
-        $data['length'] = sizeof($cartProdId);
-        for ($id = 0;$id<sizeof($cartProdId);$id++){
+        if($cartProdId == null)
+            return view('userPanel.cart')->with('data','No Product on Cart');
+        else{
+            $data['length'] = sizeof($cartProdId);
+            for ($id = 0;$id<sizeof($cartProdId);$id++){
 
-            $data[$id] = Product::getCartProduct($cartProdId[$id]); 
+                $data[$id] = Product::getCartProduct($cartProdId[$id]); 
+            }
+            //print_r($data);
+            return view('userPanel.cart')->with('data',$data);
         }
-        //print_r($data);
-        return view('userPanel.cart')->with('data',$data);
+        
         
     }
 
     public function removeFromCart(Request $request){
         $prodOnCart = $request->prodOnCart;
         $cart_index = $request->cart_index;
-        echo $prodOnCart;
-        echo $cart_index;
-        // $prodOnCart = $prodOnCart - 1;
-        // Session::put('prodOnCart',$prodOnCart);
-        // Session::push('prodId', $prodId);
+        $prodOnCart = $prodOnCart - 1;
+        $prodId = Session::get('prodId'); // Get the array
+        array_splice($prodId, $cart_index, 1);
+        Session::put('prodId', $prodId);
+        Session::put('prodOnCart',$prodOnCart);
+        Session::put('product_removed','1 Product Removed From Cart');
+        return redirect()->back();
     }
 
     /**
