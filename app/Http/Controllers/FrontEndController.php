@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\SubCategory;
+use App\Model\Product;
+use App\Model\Order;
+use App\Model\OrderProduct;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 class FrontEndController extends Controller
@@ -15,7 +18,19 @@ class FrontEndController extends Controller
         return view('userPanel.category')->with('data',$data);
     }
 
-    public function cart(){
+    public function checkout(){
+        $data = array();
+        $cartProdId = Session::get('prodId');
+        $data['length'] = sizeof($cartProdId);
+        for ($id = 0;$id<sizeof($cartProdId);$id++){
+
+            $data[$id] = Product::getCartProduct($cartProdId[$id]); 
+        }
+        //print_r($data);
+        return view('userPanel.checkout_page')->with('data',$data);
+    }
+    
+    public function proceed_order(Request $request){
         
     }
 }

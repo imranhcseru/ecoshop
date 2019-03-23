@@ -11,6 +11,7 @@
                         <table class="table ">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th ></th>
                                     <th >Product</th>
                                     <th >Price</th>
@@ -21,12 +22,16 @@
                             <tbody>
                                 @for($id = 0;$id < $data['length'];$id++)
                                 <tr>
-                                    <td><img src = "/upload/{{$data[$id]->image}}" style = "height:80px;width:80px;"></td>
+                                    <td>{{$id + 1}}</td>
+                                    <td><img src = "/images/0a09d8530691a1c23a4e4f4ec3eeff2a.jpg" style = "height:80px;width:80px;"></td>
                                     <td>{{$data[$id]->name}}</td>
                                     <td>{{$data[$id]->price}}</td>
                                     <td>Quantity</td>
                                     <td>
-                                        <button class = "btn btn-warning" id = "removeButton">
+                                        <button class = "btn btn-warning removeButton" >
+                                            <input name = 'prodOnCart' type = "hidden" id = "prodOnCart" value = <?php echo Session::get('prodOnCart');?>>
+                                            <input name = "_token" type = "hidden" id="prodToken"   value="{{csrf_token()}}">
+                                            <input name = "cart_index" type="hidden" id = "cart_index" value={{$id}}>
                                             Remove 
                                         </button>
                                     </td>
@@ -54,7 +59,7 @@
                         <h3>Shipping Fee&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;৳&nbsp;{{$sheepFee}}</h3>
                         <h3 style = "color:red;">Total Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;৳&nbsp;{{$totalPrice}}</h3>
                         <br>
-                        <a class = "btn btn-warning" style = "width:100%;font-size: 20px;">Check Out</a>
+                        <a href = "/checkout" class = "btn btn-warning" style = "width:100%;font-size: 20px;">Check Out</a>
                     </div>
                 </div>
             </div>

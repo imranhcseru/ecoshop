@@ -64,7 +64,7 @@
                 @foreach($data['subcategories'] as $subcategory)
                 <tr>
                     <td><a href="{{url('/admin/'.$subcategory->name)}}">{{$subcategory->name}}</a></td>
-                    <td><a href="{{url('/admin/'.$subcategory->category_id)}}">{{$subcategory->category_id}}</a></td>
+                    <td><a href="{{url('/admin/'.$subcategory->category_id)}}">{{$subcategory->category->name}}</a></td>
                     <td class="center">
                         <a class="btn btn-info" href="">
                             <i class="halflings-icon white edit"></i>  

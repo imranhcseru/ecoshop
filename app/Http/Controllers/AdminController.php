@@ -130,9 +130,15 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        Admin::where('id',$id)->delete();
-        Session::put('admin_delete','Admin Deleted Successfully');
-        return Redirect::to('/admin/admins');
+        $user_email = Session::get('user_email');
+        if($user_email){
+            Admin::where('id',$id)->delete();
+            Session::put('admin_delete','Admin Deleted Successfully');
+            return Redirect::to('/admin/admins');
+        }else{
+            Session::put('login_first','You need to log in first');
+            return view('adminPanel.login');
+        }
     }
 
     public function admins(){

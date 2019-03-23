@@ -15,7 +15,7 @@ class BackEndController extends Controller
 {
     public function home(){
         $type = 'published';
-        $data['products'] = DB::table('products')->where('type',$type)->orderBy('created_at','DESC')->limit(20)->get();
+        $data['products'] = Product::limit(20)->get();
         //$data['unserved_orders'] = DB::table('tbl_order')->where('type','unserved')->orderBy('date','DESC')->paginate(20);
         $user_email = Session::get('user_email');
         if($user_email){
@@ -43,7 +43,7 @@ class BackEndController extends Controller
     public function subcategories(){
         $data = array();
         $data['categories'] = Category::all();
-        $data['subcategories'] = DB::table('sub_categories')->orderBy('category_id', 'ASC')->orderBy('name','DESC')->get();
+        $data['subcategories'] = SubCategory::all();
         $user_email = Session::get('user_email');
         if($user_email){
             return view('adminPanel.sub_categories')->with('data',$data);
@@ -54,8 +54,20 @@ class BackEndController extends Controller
         
     }
 
+    public function logout(){
+        Session::put('user_name',null);
+        Session::put('user_email',null);
+        $user_email = Session::get('user_email');
+        if($user_email){
+            return view('adminPanel.login');
+        }else{
+            Session::put('login_first','You need to log in first');
+            return view('adminPanel.login');
+        }
+    } 
+
     public function users(){
-        $users = DB::table('customers')->orderBy('created_at','DESC');
+        $users = DB::table('customers')->get();
         $user_email = Session::get('user_email');
         if($user_email){
             return view('adminPanel.users')->with('users',$users);
@@ -67,7 +79,8 @@ class BackEndController extends Controller
     }
 
     public function products(){
-        $products = DB::table('products')->orderBy('sub_category_id','ASC')->orderBy('created_at','DESC')->get();
+        //$products = DB::table('products')->orderBy('sub_category_id','ASC')->orderBy('created_at','DESC')->get();
+        $products = Product::all();
         $user_email = Session::get('user_email');
         if($user_email){
             return view('adminPanel.all_products')->with('products',$products);
@@ -78,14 +91,27 @@ class BackEndController extends Controller
     }
     public function detail_product($id){
         $product = Product::where('id',$id)->first();
-        return view('adminPanel.product_detail')->with('product',$product);
+        $user_email = Session::get('user_email');
+        if($user_email){
+            return view('adminPanel.product_detail')->with('product',$product);
+        }else{
+            Session::put('login_first','You need to log in first');
+            return view('adminPanel.login');
+        }
     }
     public function edit_product($id){
         $data = array();
         $data['categories'] = DB::table('categories')->orderBy('name','ASC')->get();
         $data['subcategories'] = DB::table('sub_categories')->orderBy('name','ASC')->get();
         $data['product'] = Product::where('id',$id)->first();
-        return view('adminPanel.edit_product')->with('data',$data);
+        $user_email = Session::get('user_email');
+        if($user_email){
+            return view('adminPanel.edit_product')->with('data',$data);
+        }else{
+            Session::put('login_first','You need to log in first');
+            return view('adminPanel.login');
+        }
+        
     }
 
     public function update_product(Request $request,$id){
@@ -136,22 +162,18 @@ class BackEndController extends Controller
         }
     }
 
-    public function unpublish_product(){
-
-    }
     public function addsupply_product($id){
         $product = Product::where('id',$id)->first();
         $user_email = Session::get('user_email');
         if($user_email){
             return view('adminPanel.add_supply')->with('product',$product);
-            return Redirect::to('admin/publishedproducts');
         }else{
             Session::put('login_first','You need to log in first');
             return view('adminPanel.login');
         }
     }
 
-    public function updatesupply_product($id){
+    public function updatesupply_product(Request $request,$id){
         $product = Product::where('id',$id)->first();
         $add_stock = $request->add_stock;
         $stock = $product->stock;
@@ -180,13 +202,19 @@ class BackEndController extends Controller
             $change_type = 'draft';
             $publish_date = null;
         }
-        DB::table('products')->where('id',$id)->update(['type'=>$change_type,'published_at'=>$publish_date]);
-        Session::put('change_message','Item Type Successfully Changed');
-        return redirect()->back();
+        $user_email = Session::get('user_email');
+        if($user_email){
+            DB::table('products')->where('id',$id)->update(['type'=>$change_type,'published_at'=>$publish_date]);
+            Session::put('change_message','Item Type Successfully Changed');
+            return redirect()->back();
+        }else{
+            Session::put('login_first','You need to log in first');
+            return view('adminPanel.login');
+        }
     }
     public function draft_products(){
         $type = 'draft';
-        $products = DB::table('products')->where('type',$type)->orderBy('sub_category_id','ASC')->orderBy('created_at','DESC')->get();
+        $products = Product::where('type','draft')->get();
         $user_email = Session::get('user_email');
         if($user_email){
             return view('adminPanel.draft_products')->with('products',$products);
@@ -198,7 +226,7 @@ class BackEndController extends Controller
 
     public function published_products(){
         $type = 'published';
-        $products = DB::table('products')->where('type',$type)->orderBy('sub_category_id','ASC')->orderBy('created_at','DESC')->get();
+        $products = Product::where('type','published')->get();
         $user_email = Session::get('user_email');
         if($user_email){
             return view('adminPanel.published_products')->with('products',$products);

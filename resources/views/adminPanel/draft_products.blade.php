@@ -21,8 +21,8 @@
 						<tr>
 							<th>Item</th>
 							<th>Category</th>
-							<th>Available Product</th>
-							<th>Create Date</th>
+							<th>Stock</th>
+							<th>Created At</th>
 							<th>Added By</th>
 							<th>Actions</th>
 						</tr>
@@ -35,10 +35,10 @@
 								{{$product->name}}
 							</a>
 						</td>
-						<td>{{$product->sub_category_id}}</td>
+						<td>{{$product->subCategory->name}}</td>
 						<td>{{$product->stock}}</td>
 						<td>{{$product->created_at}}</td>
-						<td>{{$product->admin_id}}</td>
+						<td>{{$product->admin->first_name}} &nbsp;&nbsp;{{$product->admin->last_name}}</td>
 						<td class="center">
 							<a class="btn btn-info" href="{{url('/admin/addsupply/'.$product->id)}}">
 								<i>Add Supply</i>  

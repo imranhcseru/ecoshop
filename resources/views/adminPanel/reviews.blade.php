@@ -18,15 +18,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($reviews as $review)
-                    <tr>
-                        <td>{{$review->customer_id}}</td>
-                        <td>{{$review->review}}</td>
-                        <td>{{$review->star}}</td>
-                        <td>{{$review->product_id}}</td>
-                        <td>{{$review->created_at}}</td>
-                    </tr>
-                    @endforeach
+                        @foreach($reviews as $review)
+                            <tr>
+                                <td>{{$review->customer->email}}</td>
+                                <td>{{$review->review}}</td>
+                                <td>{{$review->star}}</td>
+                                <td>{{$review->product->name}}</td>
+                                <td>{{$review->created_at}}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>            
             </div>

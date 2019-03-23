@@ -63,10 +63,10 @@
 									{{$product->name}}
 								</a>
 							</td>
-							<td>{{$product->sub_category_id}}</td>
+							<td>{{$product->subCategory->name}}</td>
 							<td>{{$product->stock}}</td>
 							<td>{{$product->created_at}}</td>
-							<td>{{$product->admin_id}}</td>
+							<td>{{$product->admin->first_name}} &nbsp;&nbsp;{{$product->admin->last_name}}</td>
 						</tr>
 					@endforeach
 				</tbody>

@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Admin - Ecoshop</title>
+		<link rel="shortcut icon" href="{{{ asset('adminStatic/img/favicon.png') }}}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link id="bootstrap-style" href="{{URL::asset('back_end/css/bootstrap.min.css')}}" rel="stylesheet">
 		<link href="{{URL::asset('back_end/css/bootstrap-responsive.min.css')}}" rel="stylesheet">

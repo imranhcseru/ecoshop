@@ -20,11 +20,11 @@
                 </div>
             </div>
             <div class = "row" id = "showProd">
-                <div class="tab-content">
+                <div class="tab-content" >
                     @foreach($data['subcategories'] as $count => $subcategory)
                         <div role="tabpanel" @if($count == 0) class="tab-pane active" @else class="tab-pane" @endif id="tab-{{ $subcategory->id }}">
                             <h2>{{ $subcategory->name }}</h2>
-                            <div class = "row" style="margin-left:20px">
+                            <div class = "row" style="margin:15px;">
                                 <div v-for = "(product,index) in allProducts">
                                     <div v-if = "product.sub_category == '{{$subcategory->name}}'">
                                         <div class="card"  style="width: 22rem;">

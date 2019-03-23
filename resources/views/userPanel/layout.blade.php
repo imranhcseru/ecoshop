@@ -65,9 +65,7 @@
     <div class = "container-fluid">
         <nav class="navbar navbar-expand-md navbar-light ">
         <a class="navbar-brand pb-2 " href="{{url('/')}}"><img class = "cart_logo"src = "{{url('/userStatic/img/logo.png')}}"></a>
-        <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        
-        </button>
+        <a href = "/logout" class = "btn btn-warning">Log Out</a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
         </div>
         <div class="wrap">
@@ -125,6 +123,7 @@
     @yield('homeContent')
     @yield('cartContent')
     @yield('categoryContent')
+    @yield('checkoutContent')
     <br>
     <br>
     <br>
@@ -202,6 +201,38 @@
                     //location.reload();
                 }, 5000)            
             });
+
+        //Jquerry
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')
+                }
+            });
+            $(document).on('click','.removeButton',function(event){
+                var prodOnCart = $(this).find('#prodOnCart').val();
+                var cartIndex = $(this).find('#cart_index').val();
+                var token = $(this).find('#prodToken').val();
+                $.ajax({
+                    type : 'post',
+                    url : '/removefromcart',
+                    data : {prodOnCart:prodOnCart,cartIndex:cartIndex,token:token},
+                    success:function(returned){
+                        // swal({
+                        //     title:"Remove",
+                        //     text: "Product Removed Cart",
+                        //     icon: "success",
+                        //     timer:3000
+                        // });
+                        setTimeout(
+                            function(){
+                                location.reload();
+                        }, 2000);  
+                    }
+                });
+            });
+                
+        });
     </script>
 </body>
 </html>

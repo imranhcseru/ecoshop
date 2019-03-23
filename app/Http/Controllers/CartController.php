@@ -36,6 +36,16 @@ class CartController extends Controller
         
     }
 
+    public function removeFromCart(Request $request){
+        $prodOnCart = $request->prodOnCart;
+        $cart_index = $request->cart_index;
+        echo $prodOnCart;
+        echo $cart_index;
+        // $prodOnCart = $prodOnCart - 1;
+        // Session::put('prodOnCart',$prodOnCart);
+        // Session::push('prodId', $prodId);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

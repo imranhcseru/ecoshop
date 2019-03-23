@@ -47,12 +47,11 @@
                                 {{$product->name}}
                             </a>
                         </td>
-                        <td>{{$product->sub_category_id}}</td>
+                        <td>{{$product->subCategory->name}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->type}}</td>
                         <td>{{$product->created_at}}</td>
-                        <td>{{$product->updated_at}}</td>
-                        <td>{{$product->admin_id}}</td>
+                        <td>{{$product->admin->first_name}} &nbsp;&nbsp;{{$product->admin->last_name}}</td>
                         <td class="center">
                             <a class="btn btn-info" href="{{url('/admin/products/'.$product->id.'/edit')}}">
                                 <i class="halflings-icon white edit"></i>  

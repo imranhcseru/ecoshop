@@ -26,6 +26,14 @@ Route::get('/', function () {
 Route::Resource('/cart','CartController');
 Route::get('/category/{id}','FrontEndController@category');
 Route::post('/addtocart','CartController@addToCart');
+Route::post('/removefromcart','CartController@removeFromCart');
+Route::get('/checkout','FrontEndController@checkout');
+//Route::get('/order','OrderController@store');
+Route::post('/checkout','OrderController@store');
+Route::get('/logout',function(){
+    Session::flush();
+    return Redirect::to('/');
+});
 //Route::get('/cart','FrontEndController@cart');
 Auth::routes();
 
@@ -35,6 +43,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('/',function(){
         return view('adminPanel.login');
     });
+    Route::get('/logout','BackEndController@logout');
     Route::post('/','AdminController@checkAdmin');
     Route::get('/home','BackEndController@home');
     Route::get('/categories','BackEndController@categories');
@@ -59,16 +68,12 @@ Route::group(['prefix'=>'admin'],function(){
     });
     Route::post('/addadmin','AdminController@store');
     Route::get('/admins/{id}/delete','AdminController@destroy');
-    //Will be implemented with Vue.js
-    // Route::get('/admins',function(){
-    //     return view('adminPanel.admins');
-    // });
+    Route::get('/orders','OrderController@allOrders');
+    Route::get('/servedorders','OrderController@servedOrders');
+    Route::get('/unservedorders','OrderController@unServedOrders');
+    Route::get('/orders/{id}/serve','OrderController@serveOrder');
+    Route::get('/orders/{id}/delete','OrderController@destroy');
     Route::get('/admins','AdminController@admins');
     Route::get('/reviews','BackEndController@reviews');
-    //Will be implemented with Vue.js
-    // Route::get('/reviews',function(){
-    //     return view('adminPanel.reviews');
-    // });
-    Route::get('/orders','BackEndController@orders');
 });
 
