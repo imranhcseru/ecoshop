@@ -7,6 +7,7 @@ use App\Model\Product;
 use App\Model\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class OrderController extends Controller
@@ -41,10 +42,8 @@ class OrderController extends Controller
     {
         $order = new Order;
         $orderProduct = new OrderProduct;
-        $order->email = $request->email;
-        $order->name = $request->name;
+        $order->customer_id = Session::get('customer_id');
         $order->address = $request->address;
-        $order->phonenumber = $request->phonenumber;
         $order->serve = 'unserved';
         $order->cardname = $request->cardname;
         $order->cardnumber = $request->cardnumber;

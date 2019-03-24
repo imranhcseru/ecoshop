@@ -68,18 +68,78 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 ">
-                <div class="box span12 bg-light">
-                    <div class="box-header" data-original-title>
-                        <h2><i class="halflings-icon edit"></i><span class="break"></span>Products Description:</h2>
-                    </div>
-                    <div class="box-content ">
-                        <div>
-                            <span>
-                                <h3 style="color:yellowgreen">Rating: 5</h3>
-                            </span>
+                    <div class="box span12 bg-light">
+                        <div class="box-header" data-original-title>
+                            <h2><i class="halflings-icon edit"></i><span class="break"></span>Products Description:</h2>
+                        </div>
+                        <div class="box-content ">
+                            <div>
+                                <span>
+                                    <h3 style="color:yellowgreen">Rating: 5</h3>
+                                </span>
+                            </div>
+                            <div>
+                                <span>
+                                    <h5>{{$data['detail']->detail}}</h5>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="box span12 bg-light">
+                        <div class="box-header" data-original-title>
+                            <h2><i class="halflings-icon edit"></i><span class="break"></span>Post a Review About This Product</h2>
+                        </div>
+                        <?php
+                            $customer_email = Session::get('customer_email');
+                            if(!$customer_email){
+                                ?>  
+                                    <div class="box-content  ">
+                                        <div>
+                                            <span><h4>To Post a review <a href = "{{url('/customerlogin')}}">Log in</a>here or <a href="{{url('/customerregister')}}">Register Now</a></h4></span>
+                                        </div>
+                                    </div>
+                                <?php
+                            }
+                            else{
+                                ?>		
+                                <div class="box-content  ">
+                                    <div>
+                                        <form class="form-horizontal" action="{{url('/postreview')}}" method="post" enctype = "multipart/form-data">
+                                            {{csrf_field()}}
+                                            <fieldset>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="typeahead">Rating<h6 style = "color:red">*max = 5</h6></label>
+                                                    
+                                                    <div class="controls">
+                                                        <input type="number" max = '5' min = '1'class="span6 typeahead" id="typeahead"  name = "star" required>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <input type="hidden" class="span6 typeahead" id="typeahead"  name = "phonenumber" name = "customer_id"value = "<?php echo Session::get('customer_id');?>">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <input type="hidden" max = '5' min = '1'class="span6 typeahead" id="typeahead"  name = "product_id" value = "{{$data['detail']->id}}">
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="typeahead">Review</label>
+                                                    <div class="controls">
+                                                        <textarea type="text" class="span6 typeahead" id="typeahead"  rows = "3" name = "review" required style="width:80%"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn btn-primary" name = "submit" >Post Review</button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                        <?php }?>
+                    </div>
+                
                 <div class="box span12 bg-light">
                     <div class="box-header" data-original-title>
                         <h2><i class="halflings-icon edit"></i><span class="break"></span>Reviews From User:</h2>
@@ -98,6 +158,7 @@
                     
                 </div>
             </div>
+            
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4">
                 <div class="box span12 bg-light">
                     <div class="box-header" data-original-title>
@@ -126,5 +187,6 @@
                 </div>
             </div>
         </div>
+        
     </div>
 @endsection

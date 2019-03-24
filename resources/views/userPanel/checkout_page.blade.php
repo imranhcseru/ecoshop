@@ -13,42 +13,24 @@
                     {{csrf_field()}}
                     <fieldset>
                         <div class="control-group">
-                            <label class="control-label" for="typeahead">Name</label>
-                            <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "name" required>
-                            </div>
-                        </div>           
-                        <div class="control-group">
-                            <label class="control-label" for="typeahead">Email</label>
-                            <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "email" required>
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label" for="typeahead">Address</label>
                             <div class="controls">
-                                <input type="address" class="span6 typeahead" id="typeahead"  name = "address" required>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="typeahead">Phone Number</label>
-                            <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "phonenumber" required>
+                                <textarea type="text" class="span6 typeahead" id="typeahead"  rows = "3" name = "address" required style="width:80%"></textarea>
                             </div>
                         </div>
                         <div class="box-header" data-original-title>
-                            <h2><i class="halflings-icon edit"></i><span class="break"></span> Information</h2>
+                            <h2><i class="halflings-icon edit"></i><span class="break"></span> Payment Information</h2>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Card Name</label>
                             <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "cardname" required>
+                                <input type="text" class="span6 typeahead" id="typeahead"  name = "cardname" required style="width:80%;height:40px">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Card Number</label>
                             <div class="controls">
-                                <input type="text" class="span6 typeahead" id="typeahead"  name = "cardnumber" required>
+                                <input type="text" class="span6 typeahead" id="typeahead"  name = "cardnumber" required style="width:80%;height:40px">
                             </div>
                         </div>
                         <div class="form-actions">
@@ -80,7 +62,7 @@
                         <tr>
                             <td><img src = "/images/0a09d8530691a1c23a4e4f4ec3eeff2a.jpg" style = "height:80px;width:80px;"></td>
                             <td>{{$data[$id]->name}}</td>
-                            <td>{{$data[$id]->price}}</td>
+                            <td>Price: ৳{{$data[$id]->price}}</td>
                             <td>1</td>
                         </tr>
                         @endfor

@@ -48,6 +48,7 @@ class CustomerController extends Controller
             return redirect()->back();
         }
     }
+    
     public function store(Request $request)
     {
         $result = Customer::where('email',$request->email)->first();

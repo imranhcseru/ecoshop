@@ -12,6 +12,14 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 class FrontEndController extends Controller
 {   
+    public function storereview(Request $request){
+        $review = new Review();
+        $review->product_id = $request->product_id;
+        $review->customer_id = $request->customer_id;
+        $review->review = $request->review;
+        $review->star =  $request->star;
+        $review->save();
+    }
     public function index(){
         $products = Product::orderBy('discount','DESC')->paginate(5);
         return view('userPanel.home')->with('products',$products);

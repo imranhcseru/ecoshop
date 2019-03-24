@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Model;
-use App\Model\Customer;
-use App\Model\OrderProduct;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -14,5 +13,5 @@ class Order extends Model
     public function product(){
         return $this->belongsToMany(OrderProduct::class);
     }
-
+    
 }
