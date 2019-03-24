@@ -14,7 +14,7 @@
             <div class = "row" align = "center">
                 @foreach($products as $product)
                 <div class="card" style="width: 22rem;">
-                    <a href="{{url('/products/'.$product->id.'/details')}}"><img id = "product_image" class="card-img-top" src="/images/0a09d8530691a1c23a4e4f4ec3eeff2a.jpg" alt="Card image cap" style="height:170px;"></a> 
+                    <a href="{{url('/products/'.$product->id)}}"><img id = "product_image" class="card-img-top" src="/images/0a09d8530691a1c23a4e4f4ec3eeff2a.jpg" alt="Card image cap" style="height:170px;"></a> 
                     <div class="card-body" align = "center">
                         <h5 class="card-title" id = "product_name" >{{$product->name}}</h5>
                         <p class="card-text" id = "product_price"  >Price: ৳ <span style = "text-decoration: line-through;">{{$product->price}}</span></p>

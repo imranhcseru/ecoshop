@@ -31,10 +31,10 @@ class CartController extends Controller
         else{
             $data['length'] = sizeof($cartProdId);
             for ($id = 0;$id<sizeof($cartProdId);$id++){
-
-                $data[$id] = Product::getCartProduct($cartProdId[$id]); 
+                $new_product = Product::getCartProduct($cartProdId[$id]); 
+                array_push($data,$new_product);
+                
             }
-            //print_r($data);
             return view('userPanel.cart')->with('data',$data);
         }
         

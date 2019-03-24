@@ -70,14 +70,14 @@
                 
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 </div>
-                <div class="wrap">
+                {{-- <div class="wrap">
                     <div class="search" style= "width:130%;">
                         <input type="text" class="searchTerm" placeholder="What are you looking for?" >
                         <button type="submit" class="searchButton">
                         <i class="fa fa-search">Search</i>
                     </button>
                     </div>
-                </div>
+                </div> --}}
                 <div id = "campaign">
                     <a class="navbar-brand pb-2 " id = "cartLink" href="{{route('cart.index')}}">
                         <img id = "cart_icon" class = "cart_logo"src = "{{url('/userStatic/img/cart.png')}}">
@@ -100,7 +100,7 @@
                     <?php
                         $customer_email = Session::get('customer_email');
                         if($customer_email){
-                    ?>
+                    ?>  <h5><?php echo Session::get('customer_name');?></h5>
                         <li class="logout"><a class = "btn btn-warning" href = "{{url('/customerlogout')}}">Log Out</a></li><br>
                     <?php
                         }

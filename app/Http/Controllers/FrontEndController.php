@@ -7,6 +7,7 @@ use App\Model\SubCategory;
 use App\Model\Product;
 use App\Model\Order;
 use App\Model\OrderProduct;
+use App\Model\Review;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 class FrontEndController extends Controller
@@ -39,7 +40,11 @@ class FrontEndController extends Controller
         return view('userPanel.checkout_page')->with('data',$data);
     }
     
-    public function proceed_order(Request $request){
-        
+    public function productDetails($id){
+        $data['detail'] = Product::where('id',$id)->first();
+        $subcategory_id = $data['detail']->sub_category_id;
+        $data['subcategory'] = Product::where('sub_category_id',$subcategory_id)->get();
+        $data['reviews'] = Review::where('product_id',$id)->get();
+        return view('userPanel.product_detail')->with('data',$data);
     }
 }

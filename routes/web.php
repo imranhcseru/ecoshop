@@ -37,6 +37,7 @@ Route::get('/customerlogout',function(){
     Session::put('prodOnCart',null);
     return Redirect::to('/');
 });
+Route::get('/products/{id}','FrontEndController@productDetails');
 //Route::get('/cart','FrontEndController@cart');
 Auth::routes();
 

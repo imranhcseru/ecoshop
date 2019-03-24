@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="box-header" data-original-title>
-                            <h2><i class="halflings-icon edit"></i><span class="break"></span>Payment Information</h2>
+                            <h2><i class="halflings-icon edit"></i><span class="break"></span> Information</h2>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="typeahead">Card Name</label>
